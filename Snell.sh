@@ -162,7 +162,7 @@ stable_Download() {
 # 备用源
 backup_Download() {
 	echo -e "${Info} 试图请求 备份源 Snell Server ……"
-	wget --no-check-certificate -N "https://raw.githubusercontent.com/xOS/Others/master/snell/v3.0.1/snell-server-v3.0.1-linux-${arch}.zip"
+	wget --no-check-certificate -N "https://github.com/cute-angelia/open-snell/releases/download/v3.0.1/snell-server-linux-${arch}.zip"
 	if [[ ! -e "snell-server-v3.0.1-linux-${arch}.zip" ]]; then
 		echo -e "${Error} Snell Server 备份源 下载失败！"
 		return 1 && exit 1
@@ -184,7 +184,7 @@ backup_Download() {
 }
 
 Download_beta(){
-	echo -e "${Info} 试图请求 测试版 Snell Server ……"
+	echo -e "${Info} 试图请求 测试版 Snell Server https://manual.nssurge.com/others/snell.html ……"
 	wget --no-check-certificate -N "https://dl.nssurge.com/snell/snell-server-v4.0.1-linux-${arch}.zip"
 	if [[ ! -e "snell-server-v4.0.1-linux-${arch}.zip" ]]; then
 		echo -e "${Error} Snell Server 测试版 下载失败！"
@@ -655,14 +655,14 @@ Status(){
 
 Update_Shell(){
 	echo -e "当前版本为 [ ${sh_ver} ]，开始检测最新版本..."
-	sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/xOS/Snell/master/Snell.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1)
+	sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/cute-angelia/Snell/master/Snell.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1)
 	[[ -z ${sh_new_ver} ]] && echo -e "${Error} 检测最新版本失败 !" && start_menu
 	if [[ ${sh_new_ver} != ${sh_ver} ]]; then
 		echo -e "发现新版本[ ${sh_new_ver} ]，是否更新？[Y/n]"
 		read -p "(默认: y):" yn
 		[[ -z "${yn}" ]] && yn="y"
 		if [[ ${yn} == [Yy] ]]; then
-			wget -O snell.sh --no-check-certificate https://raw.githubusercontent.com/xOS/Snell/master/Snell.sh && chmod +x snell.sh
+			wget -O snell.sh --no-check-certificate https://raw.githubusercontent.com/cute-angelia/Snell/master/Snell.sh && chmod +x snell.sh
 			echo -e "脚本已更新为最新版本[ ${sh_new_ver} ] !"
 			echo -e "3s后执行新脚本"
             sleep 3s
